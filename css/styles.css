@@ -10,12 +10,16 @@ button{
     margin: 10px;
     cursor: pointer;
     border: none;
-    background-color: #3498db;
     color: white;
     border-radius: 5px;
+    background-color: #898989;
 }
 
-button:hover{
+button:not(:disabled){
+    background-color: #3498db;
+}
+
+button:not(:disabled):hover{
     background-color: #2980b9;
 }
 

@@ -50,3 +50,20 @@ let questions = [
         otherAnswers: ["add()", "insert()", "append()"]
     }
 ];
+
+function setQuestion(questionIndex){
+    questionElement.innerText = questions[questionIndex].question;
+    let allAnswers = questions[questionIndex].otherAnswers;
+    allAnswers.push(questions[questionIndex].correctAnswer);
+    console.log(allAnswers);
+    for (let i = 0; i < allAnswers.length; i++) {
+        let answerBox = document.createElement("div");
+        answerBox.classList.add("answer");
+        answerBox.innerText = allAnswers[i]
+        answersContainer.appendChild(answerBox);
+    }
+}
+
+let questionElement = document.getElementById("question");
+let answersContainer = document.getElementById("answersContainer");
+setQuestion(0);

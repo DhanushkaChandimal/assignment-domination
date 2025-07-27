@@ -92,28 +92,47 @@ let questionPool = [
 ];
 
 let currentQuestionIndex = 0;
+let totalCorrectAnswers = 0;
 
 function setQuestion(){
     questionElement.innerText = questionPool[currentQuestionIndex].question;
     for (let i = 0; i < questionPool[currentQuestionIndex].answers.length; i++) {
         let answerBox = document.createElement("div");
         answerBox.classList.add("answer");
+        if(questionPool[currentQuestionIndex].answers[i].isCorrect){
+            answerBox.classList.add("correctAnswer");
+        }
         answerBox.innerText = questionPool[currentQuestionIndex].answers[i].answer;
         answersContainer.appendChild(answerBox);
     }
 }
 
-function evaluateAnswer(){
-    
+function evaluateAnswer(selectedAnswerElement){
+    // console.log(selectedAnswerElement)
+    // console.log(selectedAnswerElement.classList)
+    console.log(selectedAnswerElement.classList.contains("correctAnswer"))
+    allAnswerBoxes.forEach(box => box.classList.add('disabled'));
+    btnNextQuestion.disabled = false;
+    document.querySelector(".correctAnswer").style.backgroundColor = "green";
+    // console.log(allCorrectAnswerBoxes);
+    // console.log(selectedAnswerElement);
+    if (selectedAnswerElement.classList.contains("correctAnswer")) {
+        totalCorrectAnswers ++;
+    }else{
+        selectedAnswerElement.style.backgroundColor = "red";
+    }
 }
 
 let questionElement = document.getElementById("question");
 let answersContainer = document.getElementById("answersContainer");
+let btnNextQuestion = document.getElementById("btnNextQuestion");
 setQuestion();
 const allAnswerBoxes = document.querySelectorAll(".answer");
+// const allCorrectAnswerBoxes = document.querySelector(".correctAnswer");
+allAnswerBoxes.forEach(box => box.disabled = true);
 allAnswerBoxes.forEach(ansBox => {
-    ansBox.addEventListener('click', function(event){
-        console.log(event.target.innerText);
-        evaluateAnswer(event.target.innerText);
+    ansBox.addEventListener('click', function(){
+        // console.log(this);
+        evaluateAnswer(this);
     });
 });

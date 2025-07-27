@@ -95,15 +95,17 @@ let currentQuestionIndex = 0;
 let totalCorrectAnswers = 0;
 let numberOfQuestions = 2;
 
+let selectedQuestions;
+
 function setQuestion(){
-    questionElement.innerText = questionPool[currentQuestionIndex].question;
-    for (let i = 0; i < questionPool[currentQuestionIndex].answers.length; i++) {
+    questionElement.innerText = selectedQuestions[currentQuestionIndex].question;
+    for (let i = 0; i < selectedQuestions[currentQuestionIndex].answers.length; i++) {
         let answerBox = document.createElement("div");
         answerBox.classList.add("answer");
-        if(questionPool[currentQuestionIndex].answers[i].isCorrect){
+        if(selectedQuestions[currentQuestionIndex].answers[i].isCorrect){
             answerBox.classList.add("correctAnswer");
         }
-        answerBox.innerText = questionPool[currentQuestionIndex].answers[i].answer;
+        answerBox.innerText = selectedQuestions[currentQuestionIndex].answers[i].answer;
         answersContainer.appendChild(answerBox);
     }
 }
@@ -138,6 +140,9 @@ function resetAll(){
 function resetPage(){
     currentQuestionIndex = 0;
     totalCorrectAnswers = 0;
+    selectedQuestions = questionPool
+        .sort(() => Math.random() - 0.5)
+        .slice(0, numberOfQuestions);
     resetAll();
     title.innerHTML = "JavaScript Fundamentals Quiz";
     btnNextQuestion.innerHTML = "Next Question";
@@ -168,6 +173,6 @@ const container = document.getElementById("container");
 const title = document.getElementById("title");
 let allAnswerBoxes;
 
-resetAll();
+resetPage();
 
 btnNextQuestion.addEventListener("click", btnNextQuestionOnClick);

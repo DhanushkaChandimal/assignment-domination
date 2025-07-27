@@ -13,6 +13,7 @@ button{
     color: white;
     border-radius: 5px;
     background-color: #898989;
+    cursor: default;
 }
 
 button:not(:disabled){
@@ -21,6 +22,7 @@ button:not(:disabled){
 
 button:not(:disabled):hover{
     background-color: #2980b9;
+    cursor: pointer;
 }
 
 #question{
@@ -44,5 +46,5 @@ button:not(:disabled):hover{
 }
 
 .answer:hover{
-    background-color: #bcbcbc;
+    background-color: #e6e6e6;
 }

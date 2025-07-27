@@ -1,69 +1,119 @@
-let questions = [
+let questionPool = [
     {
         question: "Which of the following is the correct syntax to print something in the console in JavaScript?",
-        correctAnswer: "console.log(\"Hello World\")",
-        otherAnswers: ["print(\"Hello World\")", "echo(\"Hello World\")", "write.console(\"Hello World\")"]
+        answers: [
+            { answer: "console.log(\"Hello World\")", isCorrect: true },
+            { answer: "print(\"Hello World\")", isCorrect: false },
+            { answer: "echo(\"Hello World\")", isCorrect: false },
+            { answer: "write.console(\"Hello World\")", isCorrect: false }
+        ]
     },
     {
         question: "What is the type of NaN in JavaScript?",
-        correctAnswer: "Number",
-        otherAnswers: ["String", "Undefined", "Object"]
+        answers: [
+            { answer: "Number", isCorrect: true },
+            { answer: "String", isCorrect: false },
+            { answer: "Undefined", isCorrect: false },
+            { answer: "Object", isCorrect: false }
+        ]
     },
     {
         question: "Which keyword is used to declare a constant in JavaScript?",
-        correctAnswer: "const",
-        otherAnswers: ["var", "let", "constant"]
+        answers: [
+            { answer: "const", isCorrect: true },
+            { answer: "var", isCorrect: false },
+            { answer: "let", isCorrect: false },
+            { answer: "constant", isCorrect: false }
+        ]
     },
     {
         question: "What is the correct syntax to declare a variable in JavaScript?",
-        correctAnswer: "let myVariable;",
-        otherAnswers: ["let = myVariable;", "let int myVariable;", "let myVariable()"]
+        answers: [
+            { answer: "let myVariable;", isCorrect: true },
+            { answer: "let = myVariable;", isCorrect: false },
+            { answer: "let int myVariable;", isCorrect: false },
+            { answer: "let myVariable()", isCorrect: false }
+        ]
     },
     {
         question: "Which of the following is NOT a JavaScript data type?",
-        correctAnswer: "Float",
-        otherAnswers: ["Boolean", "Undefined", "String"]
+        answers: [
+            { answer: "Float", isCorrect: true },
+            { answer: "Boolean", isCorrect: false },
+            { answer: "Undefined", isCorrect: false },
+            { answer: "String", isCorrect: false }
+        ]
     },
     {
         question: "What does the === operator do in JavaScript?",
-        correctAnswer: "Compares both value and type",
-        otherAnswers: ["Assigns a value", "Compares only value", "Converts value to same type then compares"]
+        answers: [
+            { answer: "Compares both value and type", isCorrect: true },
+            { answer: "Assigns a value", isCorrect: false },
+            { answer: "Compares only value", isCorrect: false },
+            { answer: "Converts value to same type then compares", isCorrect: false }
+        ]
     },
     {
         question: "Which function converts a string to an integer in JavaScript?",
-        correctAnswer: "parseInt()",
-        otherAnswers: ["toInteger()", "Number()", "int()"]
+        answers: [
+            { answer: "parseInt()", isCorrect: true },
+            { answer: "toInteger()", isCorrect: false },
+            { answer: "Number()", isCorrect: false },
+            { answer: "int()", isCorrect: false }
+        ]
     },
     {
         question: "Which of the following is used to define a block of code in JavaScript?",
-        correctAnswer: "Curly braces { }",
-        otherAnswers: ["Square brackets [ ]", "Parentheses ( )", "Angle brackets < >"]
+        answers: [
+            { answer: "Curly braces { }", isCorrect: true },
+            { answer: "Square brackets [ ]", isCorrect: false },
+            { answer: "Parentheses ( )", isCorrect: false },
+            { answer: "Angle brackets < >", isCorrect: false }
+        ]
     },
     {
         question: "How do you create a function in JavaScript?",
-        correctAnswer: "function myFunc() { }",
-        otherAnswers: ["function = myFunc()", "def myFunc() { }", "create function myFunc() { }"]
+        answers: [
+            { answer: "function myFunc() { }", isCorrect: true },
+            { answer: "function = myFunc()", isCorrect: false },
+            { answer: "def myFunc() { }", isCorrect: false },
+            { answer: "create function myFunc() { }", isCorrect: false }
+        ]
     },
     {
         question: "Which method is used to add an element to the end of an array?",
-        correctAnswer: "push()",
-        otherAnswers: ["add()", "insert()", "append()"]
+        answers: [
+            { answer: "push()", isCorrect: true },
+            { answer: "add()", isCorrect: false },
+            { answer: "insert()", isCorrect: false },
+            { answer: "append()", isCorrect: false }
+        ]
     }
 ];
 
-function setQuestion(questionIndex){
-    questionElement.innerText = questions[questionIndex].question;
-    let allAnswers = questions[questionIndex].otherAnswers;
-    allAnswers.push(questions[questionIndex].correctAnswer);
-    console.log(allAnswers);
-    for (let i = 0; i < allAnswers.length; i++) {
+let currentQuestionIndex = 0;
+
+function setQuestion(){
+    questionElement.innerText = questionPool[currentQuestionIndex].question;
+    for (let i = 0; i < questionPool[currentQuestionIndex].answers.length; i++) {
         let answerBox = document.createElement("div");
         answerBox.classList.add("answer");
-        answerBox.innerText = allAnswers[i]
+        answerBox.innerText = questionPool[currentQuestionIndex].answers[i].answer;
         answersContainer.appendChild(answerBox);
     }
 }
 
+function evaluateAnswer(){
+    
+}
+
 let questionElement = document.getElementById("question");
 let answersContainer = document.getElementById("answersContainer");
-setQuestion(0);
+setQuestion();
+const allAnswerBoxes = document.querySelectorAll(".answer");
+allAnswerBoxes.forEach(ansBox => {
+    ansBox.addEventListener('click', function(event){
+        console.log(event.target.innerText);
+        evaluateAnswer(event.target.innerText);
+    });
+});

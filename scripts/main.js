@@ -93,6 +93,7 @@ let questionPool = [
 
 let currentQuestionIndex = 0;
 let totalCorrectAnswers = 0;
+let numberOfQuestions = 5;
 
 function setQuestion(){
     questionElement.innerText = questionPool[currentQuestionIndex].question;
@@ -116,6 +117,10 @@ function evaluateAnswer(selectedAnswerElement){
     }else{
         selectedAnswerElement.style.backgroundColor = "red";
     }
+
+    if (currentQuestionIndex == numberOfQuestions - 1) {
+        btnNextQuestion.innerText = "Show Results"
+    }
 }
 
 function resetAll(){
@@ -131,8 +136,12 @@ function resetAll(){
 }
 
 function btnNextQuestionOnClick(){
-    currentQuestionIndex ++;
-    resetAll();
+    if (currentQuestionIndex < numberOfQuestions - 1) {
+        currentQuestionIndex ++;
+        resetAll();
+    }else{
+        answersContainer.innerHTML = "";
+    }
 }
 
 const questionElement = document.getElementById("question");

@@ -93,7 +93,7 @@ let questionPool = [
 
 let currentQuestionIndex = 0;
 let totalCorrectAnswers = 0;
-let numberOfQuestions = 2;
+let numberOfQuestions = 5;
 
 let selectedQuestions;
 
@@ -142,7 +142,11 @@ function resetPage(){
     totalCorrectAnswers = 0;
     selectedQuestions = questionPool
         .sort(() => Math.random() - 0.5)
-        .slice(0, numberOfQuestions);
+        .slice(0, numberOfQuestions)
+        .map(insideQuestion => ({
+            question: insideQuestion.question,
+            answers: insideQuestion.answers.sort(() => Math.random() - 0.5)
+        }));
     resetAll();
     title.innerHTML = "JavaScript Fundamentals Quiz";
     btnNextQuestion.innerHTML = "Next Question";

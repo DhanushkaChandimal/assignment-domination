@@ -93,7 +93,7 @@ let questionPool = [
 
 let currentQuestionIndex = 0;
 let totalCorrectAnswers = 0;
-let numberOfQuestions = 5;
+let numberOfQuestions = 2;
 
 function setQuestion(){
     questionElement.innerText = questionPool[currentQuestionIndex].question;
@@ -135,18 +135,33 @@ function resetAll(){
     });
 }
 
+function resetPage(){
+    currentQuestionIndex = 0;
+    resetAll();
+    title.innerHTML = "JavaScript Fundamentals Quiz";
+    btnNextQuestion.innerHTML = "Next Question";
+}
+
 function btnNextQuestionOnClick(){
     if (currentQuestionIndex < numberOfQuestions - 1) {
         currentQuestionIndex ++;
         resetAll();
     }else{
+        if (btnNextQuestion.innerText == "Restart Quiz") {
+            resetPage();
+            return;
+        }
         answersContainer.innerHTML = "";
+        title.innerHTML = "Your Score: ";
+        btnNextQuestion.innerHTML = "Restart Quiz";
+        questionElement.innerHTML = totalCorrectAnswers + " out of " + numberOfQuestions;
     }
 }
 
 const questionElement = document.getElementById("question");
 const answersContainer = document.getElementById("answersContainer");
 const btnNextQuestion = document.getElementById("btnNextQuestion");
+const title = document.getElementById("title");
 let allAnswerBoxes;
 
 resetAll();

@@ -108,14 +108,9 @@ function setQuestion(){
 }
 
 function evaluateAnswer(selectedAnswerElement){
-    // console.log(selectedAnswerElement)
-    // console.log(selectedAnswerElement.classList)
-    console.log(selectedAnswerElement.classList.contains("correctAnswer"))
     allAnswerBoxes.forEach(box => box.classList.add('disabled'));
     btnNextQuestion.disabled = false;
     document.querySelector(".correctAnswer").style.backgroundColor = "green";
-    // console.log(allCorrectAnswerBoxes);
-    // console.log(selectedAnswerElement);
     if (selectedAnswerElement.classList.contains("correctAnswer")) {
         totalCorrectAnswers ++;
     }else{
@@ -123,16 +118,28 @@ function evaluateAnswer(selectedAnswerElement){
     }
 }
 
-let questionElement = document.getElementById("question");
-let answersContainer = document.getElementById("answersContainer");
-let btnNextQuestion = document.getElementById("btnNextQuestion");
-setQuestion();
-const allAnswerBoxes = document.querySelectorAll(".answer");
-// const allCorrectAnswerBoxes = document.querySelector(".correctAnswer");
-allAnswerBoxes.forEach(box => box.disabled = true);
-allAnswerBoxes.forEach(ansBox => {
-    ansBox.addEventListener('click', function(){
-        // console.log(this);
-        evaluateAnswer(this);
+function resetAll(){
+    answersContainer.innerHTML = "";
+    btnNextQuestion.disabled = true;
+    setQuestion();
+    allAnswerBoxes = document.querySelectorAll(".answer");
+    allAnswerBoxes.forEach(ansBox => {
+        ansBox.addEventListener('click', function(){
+            evaluateAnswer(this);
+        });
     });
-});
+}
+
+function btnNextQuestionOnClick(){
+    currentQuestionIndex ++;
+    resetAll();
+}
+
+const questionElement = document.getElementById("question");
+const answersContainer = document.getElementById("answersContainer");
+const btnNextQuestion = document.getElementById("btnNextQuestion");
+let allAnswerBoxes;
+
+resetAll();
+
+btnNextQuestion.addEventListener("click", btnNextQuestionOnClick);

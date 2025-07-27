@@ -150,7 +150,6 @@ function resetPage(){
     resetAll();
     title.innerHTML = "JavaScript Fundamentals Quiz";
     btnNextQuestion.innerHTML = "Next Question";
-    container.classList.remove("finalPage");
 }
 
 function btnNextQuestionOnClick(){
@@ -166,7 +165,6 @@ function btnNextQuestionOnClick(){
         title.innerHTML = "Your Score: ";
         btnNextQuestion.innerHTML = "Restart Quiz";
         questionElement.innerHTML = totalCorrectAnswers + " out of " + numberOfQuestions;
-        container.classList.add("finalPage");
     }
 }
 

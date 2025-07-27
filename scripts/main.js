@@ -137,9 +137,11 @@ function resetAll(){
 
 function resetPage(){
     currentQuestionIndex = 0;
+    totalCorrectAnswers = 0;
     resetAll();
     title.innerHTML = "JavaScript Fundamentals Quiz";
     btnNextQuestion.innerHTML = "Next Question";
+    container.classList.remove("finalPage");
 }
 
 function btnNextQuestionOnClick(){
@@ -155,12 +157,14 @@ function btnNextQuestionOnClick(){
         title.innerHTML = "Your Score: ";
         btnNextQuestion.innerHTML = "Restart Quiz";
         questionElement.innerHTML = totalCorrectAnswers + " out of " + numberOfQuestions;
+        container.classList.add("finalPage");
     }
 }
 
 const questionElement = document.getElementById("question");
 const answersContainer = document.getElementById("answersContainer");
 const btnNextQuestion = document.getElementById("btnNextQuestion");
+const container = document.getElementById("container");
 const title = document.getElementById("title");
 let allAnswerBoxes;
 

@@ -135,6 +135,18 @@ function resetAll(){
             evaluateAnswer(this);
         });
     });
+
+    let maxWidth = 0;
+    allAnswerBoxes.forEach(ansBox => {
+        const boxWidth = ansBox.offsetWidth;
+        if (boxWidth > maxWidth) {
+            maxWidth = boxWidth;
+        }
+    });
+
+    allAnswerBoxes.forEach(ansBox => {
+        ansBox.style.width = maxWidth + 'px';
+    });
 }
 
 function resetPage(){

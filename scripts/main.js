@@ -98,7 +98,7 @@ let numberOfQuestions = 5;
 let selectedQuestions;
 
 function setQuestion(){
-    questionElement.innerText = selectedQuestions[currentQuestionIndex].question;
+    questionElement.innerText = "(" + (currentQuestionIndex + 1) + " / " + numberOfQuestions + ") " + selectedQuestions[currentQuestionIndex].question;
     for (let i = 0; i < selectedQuestions[currentQuestionIndex].answers.length; i++) {
         let answerBox = document.createElement("div");
         answerBox.classList.add("answer");
